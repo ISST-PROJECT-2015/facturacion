@@ -54,7 +54,13 @@ public class EmpresaDAOImpl implements EmpresaDAO {
 	public boolean isDomainRegistered(String domain) {
 		EntityManager em = EMFService.get().createEntityManager();
 		Query q = em.createQuery("select e from Empresa e where e.domain = :dom");
-		q.setParameter("dom", domain);
+		q.setParameter("dom", "http://"+ domain);
+		if(!q.getResultList().isEmpty()) return true;
+		q.setParameter("dom", "http://www."+ domain);
+		if(!q.getResultList().isEmpty()) return true;
+		q.setParameter("dom", "https://www."+ domain);
+		if(!q.getResultList().isEmpty()) return true;
+		q.setParameter("dom", "https://www."+ domain);
 		if(!q.getResultList().isEmpty()) return true;
 		return false;
 	}
