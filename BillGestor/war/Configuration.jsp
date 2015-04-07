@@ -69,6 +69,9 @@
 		        	<form action="" method="post" accept-charset="utf-8">
 								<input class="btn btn-default" type="submit" name="delete" id="delete" value="REMOVE ACCOUNT">
 					</form></br>
+					<form action="/send" method="post" accept-charset="utf-8">
+						<input class="btn btn-default" type="submit" value="Send email to Enterprise address">
+					</form>
 					<p>*You will lose all your data, plans and remaining requests</p>
 					
 				</div>	

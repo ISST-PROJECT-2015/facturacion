@@ -11,7 +11,8 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 	<servlet>
 		<servlet-name>Login</servlet-name>
 		<servlet-class>es.upm.dit.isst.billgestor.LoginServlet</servlet-class>
-	</servlet>	<servlet>
+	</servlet>	
+	<servlet>
 		<servlet-name>Email</servlet-name>
 		<servlet-class>es.upm.dit.isst.billgestor.EmailServlet</servlet-class>
 	</servlet>
@@ -42,6 +43,10 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 	<servlet-mapping>
 		<servlet-name>SignUp</servlet-name>
 		<url-pattern>/signup</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Email</servlet-name>
+		<url-pattern>/send</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>Dashboard</servlet-name>
