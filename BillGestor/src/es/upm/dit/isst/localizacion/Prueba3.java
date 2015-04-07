@@ -24,6 +24,9 @@ import com.google.gson.*;
 import es.upm.dit.isst.localizacion.modelo.Country;
 import es.upm.dit.isst.localizacion.dao.LocalizacionDAO;
 import es.upm.dit.isst.localizacion.dao.LocalizacionDAOImpl;
+import es.upm.dit.isst.billgestor.model.Empresa;
+import es.upm.dit.isst.billgestor.dao.EmpresaDAO;
+import es.upm.dit.isst.billgestor.dao.EmpresaDAOImpl;
 
 public class Prueba3 extends HttpServlet{
 	
@@ -34,69 +37,87 @@ public class Prueba3 extends HttpServlet{
 	}
 	
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	//Pillamos la IP
-    	String ipAddress = request.getHeader("X-FORWARDED-FOR");  
-	  	   if (ipAddress == null){  
-	  		   ipAddress = request.getRemoteAddr();
-	  	   }
-	  	
-	  	//Cojemos el host
+    	//Cojemos el host
 	  	String host = request.getParameter("host");
-	  
-	  	//Creamos la URL para coger el JSON
-	  	String url = "http://freegeoip.net/json/"+ipAddress;
+    	
+	  	EmpresaDAO daoE = EmpresaDAOImpl.getInstance();
 	  	
-	  	//Cojemos el JSON
-	  	JSONObject contenido = readJsonFromUrl(url);
-	  	
-	  	//Cojemos de ese JSON el nombre del pais
-	  	String countryName = contenido.getString("country_name");   
-	  	
-	  	//Cojemos el callback y creamos el PrintWriter donde pondremos la respuesta
-	  	String callback = request.getParameter("callback");
-        PrintWriter out = response.getWriter();     
-        
-        //Creamos un GSOn y un JsonObject
-        Gson gson = new Gson(); 
-        JsonObject myObj = new JsonObject();
-        
-        //Recuperamos los paises de la base de datos
-        LocalizacionDAO dao = LocalizacionDAOImpl.getInstance();
-        List<Country> paises = new ArrayList<Country>();
-        paises = dao.getPaises("manu.alvarez.29");
-        
-        //En caso de no estar en la base de datos asignará este 
-        Country countryInfo = new Country("manu.alvarez.29", "No Localizado", "100");
-        
-        //Busca el nombre del pais en la base de datos. Si no lo encuentra, pone el por defecto.
-        for (int i=0; i < paises.size(); i++){
-        	Country paisBucle = paises.get(i);
-        	String nameBucle = paisBucle.getName();
-        	if (nameBucle.equals(countryName)){
-        		countryInfo = paisBucle;
-        	}
-        }
-        
-        //Crea un JsonElement y le añadimos el pais localizado
-        JsonElement countryObj = gson.toJsonTree(countryInfo);
-       
-        //Comprobamos si el nombre del pais localizado es nulo
-        if(countryInfo.getName() == null){
-            myObj.addProperty("success", false); //Escribirá No hemos podido localizarte
-        }
-        else {
-            myObj.addProperty("success", true);  //Se ejecutará lo que hay en if(data.succes)
-            myObj.add("countryInfo", countryObj);
-        }
-        
-        //Escribimos la respuesta
-        if(callback != null) {
-            out.println(callback + "(" + myObj.toString() + ");");
-        }
-        else {
-            out.println(myObj.toString());
-        }
-        out.close();
+	  	if (daoE.isDomainRegistered(host) == true){
+	    	//Pillamos la IP
+	    	String ipAddress = request.getHeader("X-FORWARDED-FOR");  
+		  	   if (ipAddress == null){  
+		  		   ipAddress = request.getRemoteAddr();
+		  	   }
+		  	
+		  
+		  	//Creamos la URL para coger el JSON
+		  	String url = "http://freegeoip.net/json/"+ipAddress;
+		  	
+		  	//Cojemos el JSON
+		  	JSONObject contenido = readJsonFromUrl(url);
+		  	
+		  	//Cojemos de ese JSON el nombre del pais
+		  	String countryName = contenido.getString("country_name");   
+		  	
+		  	//Cojemos el callback y creamos el PrintWriter donde pondremos la respuesta
+		  	String callback = request.getParameter("callback");
+	        PrintWriter out = response.getWriter();     
+	        
+	        //Creamos un GSOn y un JsonObject
+	        Gson gson = new Gson(); 
+	        JsonObject myObj = new JsonObject();
+	        
+	        //Recuperamos los paises de la base de datos
+	        LocalizacionDAO daoL = LocalizacionDAOImpl.getInstance();
+	        List<Country> paises = new ArrayList<Country>();
+	        paises = daoL.getPaises("gestiondefacturas.isst");
+	        
+	        //En caso de no estar en la base de datos asignará este 
+	        Country countryInfo = new Country("gestiondefacturas.isst", "No Localizado", "100");
+	        
+	        //Busca el nombre del pais en la base de datos. Si no lo encuentra, pone el por defecto.
+	        for (int i=0; i < paises.size(); i++){
+	        	Country paisBucle = paises.get(i);
+	        	String nameBucle = paisBucle.getName();
+	        	if (nameBucle.equals(countryName)){
+	        		countryInfo = paisBucle;
+	        	}
+	        }
+	        
+	        //Crea un JsonElement y le añadimos el pais localizado
+	        JsonElement countryObj = gson.toJsonTree(countryInfo);
+	       
+	        //Comprobamos si el nombre del pais localizado es nulo
+	        if(countryInfo.getName() == null){
+	            myObj.addProperty("success", false); //Escribirá No hemos podido localizarte
+	        }
+	        else {
+	            myObj.addProperty("success", true);  //Se ejecutará lo que hay en if(data.succes)
+	            myObj.add("countryInfo", countryObj);
+	        }
+	        
+	        //Escribimos la respuesta
+	        if(callback != null) {
+	            out.println(callback + "(" + myObj.toString() + ");");
+	        }
+	        else {
+	            out.println(myObj.toString());
+	        }
+	        out.close();
+	  	}
+	  	else{
+	  		PrintWriter out = response.getWriter();  
+	  		JsonObject myObj = new JsonObject();
+	  		myObj.addProperty("success", false);
+	  		String callback = request.getParameter("callback");
+	  		if(callback != null) {
+	            out.println(callback + "(" + myObj.toString() + ");");
+	        }
+	        else {
+	            out.println(myObj.toString());
+	        }
+	        out.close();
+	  	}
     }
 	
 	
