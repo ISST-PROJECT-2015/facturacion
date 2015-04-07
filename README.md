@@ -1,2 +1,2 @@
-# facturacion
-Proyecto comun entre gestor y cliente
+# GestionFacturas
+Gestión de facturas.

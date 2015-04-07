@@ -1,0 +1,297 @@
+html, body, div, span, h1, h2, h3,
+h4, h5, h6, p, a, img, ul, li,
+fieldset, form, label, table, tbody,
+tfoot, tr, th, td, article, footer,
+header, menu, nav, section {
+	margin: 0;
+    padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+
+article, footer, header,
+menu, nav, section {
+    display: block;
+}
+
+body {
+  line-height: 1;
+}
+ol, ul {
+  list-style: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/*
+  ========================================
+  Custom styles
+  ========================================
+*/
+
+body {
+  background: #293f50;
+  color: #888;
+  font: 300 16px/22px "Lato", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+/*
+  ========================================
+  Grid
+  ========================================
+*/
+
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.col {
+  width: 50.00%;
+  margin-left: 25.00%;
+}
+
+
+/*
+  ========================================
+  Clearfix
+  ========================================
+*/
+
+.group:before,
+.group:after {
+  content: "";
+  display: table;
+}
+.group:after {
+  clear: both;
+}
+.group {
+  clear: both;
+  *zoom: 1;
+}
+
+/*
+  ========================================
+  Rows
+  ========================================
+*/
+
+.row,
+.row-alt {
+  min-width: 960px;
+}
+.row {
+  background: #DFE1F0;
+  padding: 30px 0 44px 0;
+}
+.row-alt {
+  background: #BFB461;
+  background: -webkit-linear-gradient(to right, #BFB461, #f6f1d3);
+  background:    -moz-linear-gradient(to right, #BFB461, #f6f1d3);
+  background:         linear-gradient(to right, #BFB461, #f6f1d3);
+  padding: 15px 0 15px 0;
+}
+
+/*
+  ========================================
+  Typography
+  ========================================
+*/
+
+h1, h2, h3, h4 {
+  color: #648880;
+}
+h1, h3, h4, h5, p {
+  margin-bottom: 22px;
+}
+h1 {
+  font-size: 36px;
+  line-height: 44px;
+}
+h2 {
+  font-size: 24px;
+  line-height: 44px;
+}
+h3 {
+  color: #AEB0B7;
+  font-size: 21px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  color: #a9b2b9;
+  font-size: 14px;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+strong {
+  font-weight: 400;
+}
+cite,
+em {
+  font-style: italic;
+}
+
+/*
+  ========================================
+  Leads
+  ========================================
+*/
+
+.lead {
+  text-align: center;
+}
+.lead p {
+  font-size: 21px;
+  line-height: 33px;
+}
+
+/*
+  ========================================
+  Links
+  ========================================
+*/
+
+p {
+  border-bottom: 1px solid #dfe2e5;
+}
+.primary-header a,
+.primary-footer a {
+  color: #fff;
+}
+.primary-header a:hover,
+.primary-footer a:hover {
+  color: #648880;
+}
+
+/*
+  ========================================
+  Buttons
+  ========================================
+*/
+
+.btn {
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: 400;
+  letter-spacing: .5px;
+  margin: ;
+  text-transform: uppercase;
+}
+
+.btn-default {
+  border: 0;
+  background: #648880;
+  padding: 11px 30px;
+  font-size: 14px;
+}
+.btn-default:hover {
+  background: #77a198;
+}
+/*
+  ========================================
+  Primary header
+  ========================================
+*/
+
+.logo {
+  border-top: solid #648880;
+  border-bottom: solid #648880;
+  float: left;
+  width: 170px;
+  padding: 10px 0 10px 0;
+  margin-bottom: 20px;
+}
+
+.logo-box{
+  margin-top: 20px;
+
+}
+.tagline {
+  margin: 60px 0 10px 0;
+  text-align: right;
+}
+
+/*
+  ========================================
+  Main
+  ========================================
+*/
+
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+.container,
+.grid {
+  margin: 0 auto;
+  width: 960px;
+}
+.container {
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+/*
+  ========================================
+  Register
+  ========================================
+*/
+
+form {
+  margin-bottom: 22px;
+  background-color: #fff;
+  border: 4px solid #BFB461;
+  padding: 30px 20px 20px 20px;
+}
+input,
+select {
+  font: 300 16px/22px "Lato", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.register-group label {
+  color: #648880;
+  cursor: pointer;
+  font-weight: 500;
+  float: left;
+  padding-left: 10px;
+}
+.register-group input,
+.register-group select {
+  border: 1px solid #c6c9cc;
+  border-radius: 5px;
+  color: #888;
+  display: block;
+  margin: 5px 5px 27px 5px;
+  padding: 5px 8px;
+  width: 100%;
+}
+
+
+
+/*
+  ========================================
+  Primary footer
+  ========================================
+*/
+
+.primary-footer {
+  color: #648880;
+  font-size: 14px;
+  padding-bottom: 20px;
+  padding-top: 20px;
+}

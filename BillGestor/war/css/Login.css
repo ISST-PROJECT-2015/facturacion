@@ -1,0 +1,269 @@
+html, body, div, span, h1, h2, h3,
+h4, h5, h6, p, a, img, ul, li,
+fieldset, form, label, table, tbody,
+tfoot, tr, th, td, article, footer,
+header, menu, nav, section {
+	margin: 0;
+    padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+
+article, footer, header,
+menu, nav, section {
+    display: block;
+}
+
+body {
+  line-height: 1;
+}
+ol, ul {
+  list-style: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/*
+  ========================================
+  Custom styles
+  ========================================
+*/
+
+body {
+  background: #293f50;
+  color: #888;
+  font: 300 16px/22px "Lato", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+/*
+  ========================================
+  Grid
+  ========================================
+*/
+
+.container,
+.grid {
+  margin: 0 auto;
+  width: 960px;
+}
+.container {
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+/*
+  ========================================
+  Clearfix
+  ========================================
+*/
+
+.group:before,
+.group:after {
+  content: "";
+  display: table;
+}
+.group:after {
+  clear: both;
+}
+.group {
+  clear: both;
+  *zoom: 1;
+}
+
+/*
+  ========================================
+  Rows
+  ========================================
+*/
+
+.row,
+.row-alt {
+  min-width: 960px;
+}
+.row {
+  background: #fff;
+  padding: 66px 0 44px 0;
+}
+.row-alt {
+  background: #BFB461;
+  background: -webkit-linear-gradient(to right, #BFB461, #f6f1d3);
+  background:    -moz-linear-gradient(to right, #BFB461, #f6f1d3);
+  background:         linear-gradient(to right, #BFB461, #f6f1d3);
+  padding: 44px 0 22px 0;
+}
+
+/*
+  ========================================
+  Typography
+  ========================================
+*/
+
+h1, h2, h3, h4 {
+  color: #648880;
+}
+h1, h3, h4, h5, p {
+  margin-bottom: 22px;
+}
+h1 {
+  font-size: 36px;
+  line-height: 44px;
+}
+h2 {
+  font-size: 24px;
+  line-height: 44px;
+}
+h3 {
+  color: #AEB0B7;
+  font-size: 21px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  color: #a9b2b9;
+  font-size: 14px;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+strong {
+  font-weight: 400;
+}
+cite,
+em {
+  font-style: italic;
+}
+
+/*
+  ========================================
+  Leads
+  ========================================
+*/
+
+.lead {
+  text-align: center;
+}
+.lead p {
+  font-size: 21px;
+  line-height: 33px;
+}
+
+/*
+  ========================================
+  Buttons
+  ========================================
+*/
+
+.btn {
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: 400;
+  letter-spacing: .5px;
+  margin: 0;
+  text-transform: uppercase;
+}
+.btn-login {
+  border: 0;
+  background: #D5D4CB;
+  padding: 11px 30px;
+  font-size: 14px;
+}
+.btn-login:hover {
+  background: #F0EFE5;
+}
+
+.btn-default {
+  border: 0;
+  background: #648880;
+  padding: 11px 30px;
+  font-size: 14px;
+}
+.btn-default:hover {
+  background: #77a198;
+}
+/*
+  ========================================
+  Primary header
+  ========================================
+*/
+
+.logo {
+  border-top: solid #648880;
+  border-bottom: solid #648880;
+  float: left;
+  width: 260px;
+  padding: 10px 0 10px 0;
+}
+
+.logo-box{
+  margin-top: 30px;
+
+}
+.tagline {
+  margin: 40px 0 10px 0;
+  text-align: right;
+}
+
+/*
+  ========================================
+  Register
+  ========================================
+*/
+
+form {
+  float: right;
+  margin: 20px 0 20px 0;
+}
+input,
+select,
+textarea {
+  font: 300 16px/22px "Lato", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.login-form label {
+  color: #648880;
+  cursor: pointer;
+  font-weight: 400;
+}
+.login-form input,
+.login-form select,
+.login-form textarea {
+  border: 1px solid #c6c9cc;
+  border-radius: 5px;
+  color: #888;
+  margin: 5px 0 5px 0;
+  padding: 5px 16px;
+}
+
+
+
+/*
+  ========================================
+  Table
+  ========================================
+*/
+
+table, th, td {
+    border-collapse: collapse;
+}
+th,td {
+    padding: 0 5px 0 5px;
+}
+
+/*
+  ========================================
+  Primary footer
+  ========================================
+*/
+
+.primary-footer {
+  color: #648880;
+  font-size: 14px;
+  padding-bottom: 44px;
+  padding-top: 40px;
+}
