@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns="http://java.sun.com/xml/ns/javaee"
+xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+	<servlet>
+		<servlet-name>BillGestor</servlet-name>
+		<servlet-class>es.upm.dit.isst.billgestor.BillGestorServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>Login</servlet-name>
+		<servlet-class>es.upm.dit.isst.billgestor.LoginServlet</servlet-class>
+	</servlet>	<servlet>
+		<servlet-name>Email</servlet-name>
+		<servlet-class>es.upm.dit.isst.billgestor.EmailServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>Dashboard</servlet-name>
+		<servlet-class>es.upm.dit.isst.billgestor.DashboardServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>SignUp</servlet-name>
+		<servlet-class>es.upm.dit.isst.billgestor.SignUpServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>ChoosePlan</servlet-name>
+		<servlet-class>es.upm.dit.isst.billgestor.ChoosePlanServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>Configuration</servlet-name>
+		<servlet-class>es.upm.dit.isst.billgestor.ConfigurationServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Configuration</servlet-name>
+		<url-pattern>/configuration</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>BillGestor</servlet-name>
+		<url-pattern>/billgestor</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>SignUp</servlet-name>
+		<url-pattern>/signup</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Dashboard</servlet-name>
+		<url-pattern>/dashboard</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ChoosePlan</servlet-name>
+		<url-pattern>/chooseplan</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Login</servlet-name>
+		<url-pattern>/login</url-pattern>
+	</servlet-mapping>	<servlet-mapping>
+		<servlet-name>Email</servlet-name>
+		<url-pattern>/mail</url-pattern>
+	</servlet-mapping>
+	
+	
+	<servlet>
+		<servlet-name>Prueba2</servlet-name>
+		<servlet-class>es.upm.dit.isst.localizacion.Prueba2</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Prueba2</servlet-name>
+		<url-pattern>/prueba2</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>Prueba3</servlet-name>
+		<servlet-class>es.upm.dit.isst.localizacion.Prueba3</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Prueba3</servlet-name>
+		<url-pattern>/prueba3</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>Main</servlet-name>
+		<servlet-class>es.upm.dit.isst.localizacion.MainServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Main</servlet-name>
+		<url-pattern>/main</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>CreateCountry</servlet-name>
+		<servlet-class>es.upm.dit.isst.localizacion.CreateCountryServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CreateCountry</servlet-name>
+		<url-pattern>/new</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>RemoveCountry</servlet-name>
+		<servlet-class>es.upm.dit.isst.localizacion.RemoveCountryServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>RemoveCountry</servlet-name>
+		<url-pattern>/done</url-pattern>
+	</servlet-mapping>
+	
+	<welcome-file-list>
+		<welcome-file>Login.jsp</welcome-file>
+	</welcome-file-list>
+</web-app>
