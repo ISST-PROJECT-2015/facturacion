@@ -52,13 +52,15 @@ public class EmpresaDAOImpl implements EmpresaDAO {
 
 	@Override
 	public boolean isDomainRegistered(String domain) {
-		// TODO Auto-generated method stub
+		EntityManager em = EMFService.get().createEntityManager();
+		Query q = em.createQuery("select e from Empresa e where e.domain = :dom");
+		q.setParameter("dom", domain);
+		if(!q.getResultList().isEmpty()) return true;
 		return false;
 	}
 
 	@Override
 	public boolean areEnoughRequestLeft(String domain) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 	
