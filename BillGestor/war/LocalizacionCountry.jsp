@@ -11,7 +11,7 @@
 <html>
 	<head>
 		<title>Paises</title>
-		<link rel="stylesheet" type="text/css" href="css/main.css" />
+		<link rel="stylesheet" type="text/css" href="css/localizacionCountry.css" />
 		<meta charset="utf-8">
 	</head>
 	<body>
