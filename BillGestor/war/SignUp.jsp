@@ -34,7 +34,7 @@
 			            <input input type="text" name="name" id="name" required>
 			            
 			            <label for="domain"> Website </label>
-			            <input type="url" name="domain" id="domain" required>
+			            <input type="text" name="domain" id="domain" required>
 			           
 			            <label for="email"> Email </label>
 			            <input type="email" name="email" id="email" required>

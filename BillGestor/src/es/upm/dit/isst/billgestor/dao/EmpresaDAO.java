@@ -18,7 +18,9 @@ public interface EmpresaDAO {
 	
 	public void increaseRequests(int newRequests, String domain);
 	
-	public void decreaseOneRequest(String domain);
+	public void decreaseOneRequest(String email);
+	
+	public void decreaseOneRequestDomain(String domain);
 	
 	public void setWarningRequest(int warning_request, String email);
 	

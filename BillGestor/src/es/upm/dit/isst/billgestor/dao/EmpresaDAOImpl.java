@@ -52,7 +52,10 @@ public class EmpresaDAOImpl implements EmpresaDAO {
 
 	@Override
 	public boolean isDomainRegistered(String domain) {
-		// TODO Auto-generated method stub
+		EntityManager em = EMFService.get().createEntityManager();
+		Query q = em.createQuery("select e from Empresa e where e.domain = :dom");
+		q.setParameter("dom", domain);
+		if(!q.getResultList().isEmpty()) return true;
 		return false;
 	}
 
@@ -81,6 +84,7 @@ public class EmpresaDAOImpl implements EmpresaDAO {
 		return e;
 	}
 	
+	@Override
 	public void increaseRequests(int newRequests, String email){
 		EntityManager em = EMFService.get().createEntityManager();
 		Query q = em.createQuery("select e from Empresa e where e.email = :em");
@@ -106,6 +110,7 @@ public class EmpresaDAOImpl implements EmpresaDAO {
 		
 	}
 	
+	@Override
 	public void setWarningRequest(int warning_request, String email){
 		EntityManager em = EMFService.get().createEntityManager();
 		Query q = em.createQuery("select e from Empresa e where e.email = :em");
@@ -116,6 +121,8 @@ public class EmpresaDAOImpl implements EmpresaDAO {
 		em.getTransaction().commit();
 	}
 	
+	
+	@Override
 	public void decreaseOneRequest(String email){
 		EntityManager em = EMFService.get().createEntityManager();
 		Query q = em.createQuery("select e from Empresa e where e.email = :em");
@@ -141,7 +148,49 @@ public class EmpresaDAOImpl implements EmpresaDAO {
 			System.out.println("Correo enviado a:"+ RECIPIENT1);
 			
 		}
-		if(e.getRemainingRequest() == 0){
+		if(e.getPlan().equals(Plan.NO_PLAN)){
+			RECIPIENT1 = e.getEmail();
+			String from = USER_NAME;
+	        String pass = PASSWORD;
+	        String[] to = { RECIPIENT1 }; // list of recipient email addresses
+	        String subject = "GEEFT: Request Limit Reached. 0 Requests Left";
+	        String body = "We inform you have run out of requests available. Please log into your user account and choose a new package plan. "
+	        		+ "Thank you.";
+
+	        EmailUtility.sendFromGMail(from, pass, to, subject, body);
+			System.out.println("Correo enviado a:"+ RECIPIENT1 );
+		}
+		em.getTransaction().commit();
+		
+	}
+
+	@Override
+	public void decreaseOneRequestDomain(String domain) {
+		EntityManager em = EMFService.get().createEntityManager();
+		Query q = em.createQuery("select e from Empresa e where e.domain = :dom");
+		q.setParameter("dom", domain);
+		Empresa e = (Empresa) q.getResultList().get(0);	
+		em.getTransaction().begin();
+		if(e.getRemainingRequest()>0){
+			e.setRemainingRequest(e.getRemainingRequest()-1);
+		}if(e.getRemainingRequest()<=0){
+			e.setPlan(Plan.NO_PLAN);
+			e.setRemainingRequest(1);
+		}
+		if(e.getRemainingRequest() == e.getWarningRequest()){
+			RECIPIENT1 = e.getEmail();
+			String from = USER_NAME;
+	        String pass = PASSWORD;
+	        String[] to = { RECIPIENT1 }; // list of recipient email addresses
+	        String subject = "GEEFT: Request Limit Reached. " + e.getRemainingRequest() + " Requests Left";
+	        String body = "We inform you are about to run out of requests available. Please log into your user account and choose a new package plan. "
+	        		+ "Thank you.";
+
+	        EmailUtility.sendFromGMail(from, pass, to, subject, body);
+			System.out.println("Correo enviado a:"+ RECIPIENT1);
+			
+		}
+		if(e.getPlan().equals(Plan.NO_PLAN)){
 			RECIPIENT1 = e.getEmail();
 			String from = USER_NAME;
 	        String pass = PASSWORD;
