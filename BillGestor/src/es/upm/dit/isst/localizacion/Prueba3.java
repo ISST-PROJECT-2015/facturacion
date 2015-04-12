@@ -88,6 +88,7 @@ public class Prueba3 extends HttpServlet{
 	        	}
 	        }
 	        
+	        
 	        //Calculamos el total + iva
 	        double iva = Double.parseDouble(countryInfo.getIva());
 	        double totalIva = total * ((iva/100)+1);
