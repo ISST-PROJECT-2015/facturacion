@@ -24,7 +24,6 @@ import com.google.gson.*;
 import es.upm.dit.isst.localizacion.modelo.Country;
 import es.upm.dit.isst.localizacion.dao.LocalizacionDAO;
 import es.upm.dit.isst.localizacion.dao.LocalizacionDAOImpl;
-import es.upm.dit.isst.billgestor.model.Empresa;
 import es.upm.dit.isst.billgestor.dao.EmpresaDAO;
 import es.upm.dit.isst.billgestor.dao.EmpresaDAOImpl;
 
@@ -37,19 +36,22 @@ public class Prueba3 extends HttpServlet{
 	}
 	
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	//Cojemos el host
+    	//Cojemos el host, y el total
 	  	String host = request.getParameter("host");
+	  	String totalString = request.getParameter("total");
+	  	double total = Double.parseDouble(totalString);
     	
+	  	//Acudimos a la base de datos de EMPRESA
 	  	EmpresaDAO daoE = EmpresaDAOImpl.getInstance();
 	  	
+	  	//Si el host esta registrado
 	  	if (daoE.isDomainRegistered(host) == true){
 	  		
-	    	//Pillamos la IP
+	    	//Cogemos la IP
 	    	String ipAddress = request.getHeader("X-FORWARDED-FOR");  
 		  	   if (ipAddress == null){  
 		  		   ipAddress = request.getRemoteAddr();
 		  	   }
-		  	
 		  
 		  	//Creamos la URL para coger el JSON
 		  	String url = "http://freegeoip.net/json/"+ipAddress;
@@ -85,16 +87,23 @@ public class Prueba3 extends HttpServlet{
 	        	}
 	        }
 	        
+	        //Calculamos el total + iva
+	        double iva = Double.parseDouble(countryInfo.getIva());
+	        double totalIva = total * ((iva/100)+1);
+	        String totalIvaString = String.format ("%.2f", totalIva);
+	        
 	        //Crea un JsonElement y le añadimos el pais localizado
 	        JsonElement countryObj = gson.toJsonTree(countryInfo);
+	        JsonElement totalIvaObj = gson.toJsonTree(totalIvaString);
 	       
 	        //Comprobamos si el nombre del pais localizado es nulo
 	        if(countryInfo.getName() == null){
-	            myObj.addProperty("success", false); //Escribirá No hemos podido localizarte
+	            myObj.addProperty("success", false); //Escribirá ERROR
 	        }
 	        else {
 	            myObj.addProperty("success", true);  //Se ejecutará lo que hay en if(data.succes)
 	            myObj.add("countryInfo", countryObj);
+	            myObj.add("totalIva", totalIvaObj);
 	        }
 	        
 	        //Escribimos la respuesta
