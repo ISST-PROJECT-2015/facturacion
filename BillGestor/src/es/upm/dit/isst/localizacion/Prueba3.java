@@ -10,6 +10,7 @@ import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
+import java.text.DecimalFormat;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -90,9 +91,10 @@ public class Prueba3 extends HttpServlet{
 	        //Calculamos el total + iva
 	        double iva = Double.parseDouble(countryInfo.getIva());
 	        double totalIva = total * ((iva/100)+1);
-	        String totalIvaString = String.format ("%.2f", totalIva);
+	        DecimalFormat resultado = new DecimalFormat("#.##");
+	        String totalIvaString = resultado.format(totalIva);
 	        
-	        //Crea un JsonElement y le añadimos el pais localizado
+	        //Creamos JsonElement y les añadimos el pais y el total+iva
 	        JsonElement countryObj = gson.toJsonTree(countryInfo);
 	        JsonElement totalIvaObj = gson.toJsonTree(totalIvaString);
 	       
