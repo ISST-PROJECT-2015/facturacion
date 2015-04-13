@@ -29,10 +29,10 @@ public class LocalizacionDAOImpl implements LocalizacionDAO {
 	}
 
 	@Override
-	public void add(String userId, String name, String iva) {
+	public void add(String userId, String name, String iva, String code) {
 		synchronized (this) {
 			EntityManager em = EMFService.get().createEntityManager();
-			Country pais = new Country(userId, name, iva);
+			Country pais = new Country(userId, name, iva, code);
 			em.persist(pais);
 			em.close();
 		}

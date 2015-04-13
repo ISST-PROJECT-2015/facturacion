@@ -34,12 +34,14 @@
 			<tr>
 				<th>Pais</th>
 				<th>Iva</th>
+				<th>Codigo</th>
 			</tr>
 	
 			<c:forEach items="${paises}" var="country">
 				<tr>
 					<td><c:out value="${country.name}" /></td>
 					<td><c:out value="${country.iva}" /></td>
+					<td><c:out value="${country.code}" /></td>
 					<td><a class="done"
 						href="<c:url value="/done?id=${country.id}" />">Eliminar</a></td>
 				</tr>
@@ -64,6 +66,10 @@
 							<tr>
 								<td><label for="iva">Iva</label></td>
 								<td><input type="text" name="iva" id="iva" size="65" /></td>
+							</tr>
+							<tr>
+								<td><label for="code">Codigo</label></td>
+								<td><input type="text" name="code" id="code" size="65" /></td>
 							</tr>
 							<tr>
 								<td colspan="2" align="right"><input type="submit"

@@ -77,7 +77,7 @@ public class Prueba3 extends HttpServlet{
 	        paises = daoL.getPaises("gestiondefacturas.isst");
 	        
 	        //En caso de no estar en la base de datos asignará este 
-	        Country countryInfo = new Country("gestiondefacturas.isst", "No Localizado", "100");
+	        Country countryInfo = new Country("gestiondefacturas.isst", "No Localizado", "100", "NLO");
 	        
 	        //Busca el nombre del pais en la base de datos. Si no lo encuentra, pone el por defecto.
 	        for (int i=0; i < paises.size(); i++){

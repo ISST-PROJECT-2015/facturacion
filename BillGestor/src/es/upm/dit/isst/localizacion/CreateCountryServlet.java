@@ -28,9 +28,10 @@ public class CreateCountryServlet extends HttpServlet {
 
 		String name = checkNull(req.getParameter("name"));
 		String iva = checkNull(req.getParameter("iva"));
+		String code = checkNull(req.getParameter("code"));
 
 		LocalizacionDAO dao = LocalizacionDAOImpl.getInstance();
-		dao.add(user.getNickname(), name, iva);
+		dao.add(user.getNickname(), name, iva, code);
 
 		resp.sendRedirect("/main");
 	}

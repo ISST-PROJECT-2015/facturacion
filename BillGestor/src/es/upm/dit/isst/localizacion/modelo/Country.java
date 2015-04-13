@@ -19,11 +19,13 @@ public class Country implements Serializable {
 	
     private String name;
     private String iva;
+    private String code;
     
-    public Country(String autor, String name, String iva){
+    public Country(String autor, String name, String iva, String code){
     	this.autor = autor;
     	this.name = name;
     	this.iva = iva;
+    	this.code = code;
     }
     
     public Long getId() {
@@ -51,5 +53,13 @@ public class Country implements Serializable {
     
     public void setIva(String iva) {
         this.iva = iva;
+    }
+    
+    public String getCode() {
+        return code;
+    }
+    
+    public void setCode(String code) {
+        this.code = code;
     }
 }

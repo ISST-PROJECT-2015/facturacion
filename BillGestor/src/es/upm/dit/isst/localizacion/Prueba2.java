@@ -66,8 +66,8 @@ public class Prueba2 extends HttpServlet{
 		  	//Cojemos el JSON
 		  	JSONObject contenido = readJsonFromUrl(url);
 		  	
-		  	//Cojemos de ese JSON el nombre del pais
-		  	String countryName = contenido.getString("country_name");   
+		  	//Cojemos de ese JSON el codigo del pais
+		  	String countryCode = contenido.getString("country_code");   
 		  	
 		  	//Cojemos el callback y creamos el PrintWriter donde pondremos la respuesta
 		  	String callback = request.getParameter("callback");
@@ -83,13 +83,13 @@ public class Prueba2 extends HttpServlet{
 	        paises = daoL.getPaises("gestiondefacturas.isst");
 	        
 	        //En caso de no estar en la base de datos asignará este 
-	        Country countryInfo = new Country("gestiondefacturas.isst", "No Localizado", "100");
+	        Country countryInfo = new Country("gestiondefacturas.isst", "No Localizado", "100", "NLO");
 	        
 	        //Busca el nombre del pais en la base de datos. Si no lo encuentra, pone el por defecto.
 	        for (int i=0; i < paises.size(); i++){
 	        	Country paisBucle = paises.get(i);
-	        	String nameBucle = paisBucle.getName();
-	        	if (nameBucle.equals(countryName)){
+	        	String codeBucle = paisBucle.getCode();
+	        	if (codeBucle.equals(countryCode)){
 	        		countryInfo = paisBucle;
 	        	}
 	        }
