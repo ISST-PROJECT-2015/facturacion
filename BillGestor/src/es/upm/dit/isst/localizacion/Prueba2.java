@@ -46,7 +46,13 @@ public class Prueba2 extends HttpServlet{
 	  	String totalString = request.getParameter("total");
 	  	String exito = request.getParameter("exito");
 	  	String si = "si";
+	  	String so = "SO"; //geolocalizacion soportada
+	  	String codigoGeo = request.getParameter("codigoGeo");
+	  	String latitude = request.getParameter("latitude");
+	  	String longitude = request.getParameter("longitude");
 	  	double total = Double.parseDouble(totalString);
+	  	boolean geo = false;
+	  	boolean ip = false;
     	
 	  	//Acudimos a la base de datos de EMPRESA
 	  	EmpresaDAO daoE = EmpresaDAOImpl.getInstance();
@@ -83,7 +89,7 @@ public class Prueba2 extends HttpServlet{
 	        paises = daoL.getPaises("gestiondefacturas.isst");
 	        
 	        //En caso de no estar en la base de datos asignará este 
-	        Country countryInfo = new Country("gestiondefacturas.isst", "No Localizado", "100", "NLO");
+	        Country countryInfo = new Country("gestiondefacturas.isst", "FueraUE", "100", "NLO");
 	        
 	        //Busca el nombre del pais en la base de datos. Si no lo encuentra, pone el por defecto.
 	        for (int i=0; i < paises.size(); i++){
@@ -91,6 +97,7 @@ public class Prueba2 extends HttpServlet{
 	        	String codeBucle = paisBucle.getCode();
 	        	if (codeBucle.equals(countryCode)){
 	        		countryInfo = paisBucle;
+	        		ip = true;
 	        	}
 	        }
 	        
@@ -103,7 +110,41 @@ public class Prueba2 extends HttpServlet{
 	        //Creamos JsonElement y les añadimos el pais y el total+iva
 	        JsonElement countryObj = gson.toJsonTree(countryInfo);
 	        JsonElement totalIvaObj = gson.toJsonTree(totalIvaString);
-	       
+	        
+		  	//El caso de que lo hemos geolocalizado ponemos el nombre como null para que escriba ERROR
+		  	if (codigoGeo.equals(so)){
+		  		String urlGeo = "http://api.geonames.org/countryCodeJSON?formatted=true&lat="+latitude+"&lng="+longitude+"&username=gestiondefacturas&style=full";
+		  		JSONObject contenidoGeo = readJsonFromUrl(urlGeo);
+		  		String countryCodeGeo = contenidoGeo.getString("countryCode");  
+		  		if (countryCode.equals(countryCodeGeo) == false){
+		  			countryInfo.setName(null);
+		  			ip = false;
+		  			geo = false;
+		  		}else{
+		  			ip = true;
+		  			geo = true;
+		  		}
+		  	}else{
+		  		geo = false;
+		  	}
+		  		  	
+		  	String localizadoPor ="ERROR";
+	        if ((ip == false) && (geo == false)){
+	        	myObj.addProperty("success", false);
+	        	localizadoPor = "Hemos obtenido ua diferencia entre su localizacion IP y su geolocalizacion";
+	        }
+	        if ((ip == true) && (geo == false)){
+	        	localizadoPor = "Localizado mediante IP";
+	        }
+	        if ((ip == true) && (geo == true)){
+	        	localizadoPor = "Localizado mediante IP y geolocalizacion";
+	        }
+	        if ((ip == false) && (geo == true)){
+	        	localizadoPor = "Localizado mediante geolocalizacion";
+	        }
+	        
+	        JsonElement localizadoPorObj = gson.toJsonTree(localizadoPor);
+		  	
 	        //Comprobamos si el nombre del pais localizado es nulo
 	        if(countryInfo.getName() == null){
 	            myObj.addProperty("success", false); //Escribirá ERROR
@@ -112,7 +153,8 @@ public class Prueba2 extends HttpServlet{
 	            myObj.addProperty("success", true);  //Se ejecutará lo que hay en if(data.succes)
 	            myObj.add("countryInfo", countryObj);
 	            myObj.add("totalIva", totalIvaObj);
-	        }    
+	            myObj.add("localizadoPor",localizadoPorObj);
+	        }    	        
 	        
 	        //Escribimos la respuesta
 	        if(callback != null) {
