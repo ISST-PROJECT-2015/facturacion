@@ -6,6 +6,8 @@ public interface FacturaDAO {
 
 	public void add(String name, String pais, String total, String totalIva);  //cliente
 	
+	public Factura getFactura(String name);
+	
 	public boolean tieneFacturaPais(String name, String pais); //cliente
 	
 	public Factura getFacturaPais(String name, String pais);  //cliente

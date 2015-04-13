@@ -42,8 +42,7 @@ public class LocalizacionDAOImpl implements LocalizacionDAO {
 	@Override
 	public List<Country> getPaises(String userId) {
 		EntityManager em = EMFService.get().createEntityManager();
-		Query q = em
-				.createQuery("select t from Country t where t.autor = :userId");
+		Query q = em.createQuery("select t from Country t where t.autor = :userId");
 		q.setParameter("userId", userId);
 		List<Country> paises = q.getResultList();
 		return paises;
@@ -67,6 +66,15 @@ public class LocalizacionDAOImpl implements LocalizacionDAO {
 				.createQuery("select distinct t.autor from Country t");
 		List<String> users = q.getResultList();
 		return users;
+	}
+	
+	@Override
+	public List<String> getCountriesNames() {
+		EntityManager em = EMFService.get().createEntityManager();
+		Query q = em
+				.createQuery("select n.name from Country n");
+		List<String> names = q.getResultList();
+		return names;
 	}
 
 

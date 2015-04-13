@@ -4,6 +4,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import es.upm.dit.isst.billgestor.dao.EMFService;
+import es.upm.dit.isst.billgestor.model.Empresa;
 import es.upm.dit.isst.factura.model.Factura;
 
 public class FacturaDAOImpl implements FacturaDAO {
@@ -27,6 +28,15 @@ public class FacturaDAOImpl implements FacturaDAO {
 			em.persist(factura);
 			em.close();
 		}
+	}
+	
+	@Override
+	public Factura getFactura(String name){
+		EntityManager em = EMFService.get().createEntityManager();
+		Query q = em.createQuery("select f from Factura f where f.name = :name");
+		q.setParameter("name", name);
+		Factura f = (Factura) q.getResultList().get(0);
+		return f;
 	}
 
 	@Override

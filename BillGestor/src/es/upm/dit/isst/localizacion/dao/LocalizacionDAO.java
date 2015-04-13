@@ -11,5 +11,6 @@ public interface LocalizacionDAO {
 	public List<Country> getPaises(String userId);
 	public void remove (long id);
 	public List<String> getUsers();
+	public List<String> getCountriesNames();
 }
 
