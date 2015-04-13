@@ -12,15 +12,17 @@ public interface EmpresaDAO {
 	
 	public Empresa getEnterprise(String email);
 	
-	public boolean isDomainRegistered(String domain);
+	public Empresa getEnterpriseDomain(String domain); //CLIENTE
 	
-	public boolean areEnoughRequestLeft(String domain);
+	public boolean isDomainRegistered(String domain); //CLIENTE
+	
+	public boolean areEnoughRequestLeft(String domain); 
 	
 	public void increaseRequests(int newRequests, String domain);
 	
 	public void decreaseOneRequest(String email);
 	
-	public void decreaseOneRequestDomain(String domain);
+	public void decreaseOneRequestDomain(String domain); //CLIENTE
 	
 	public void setWarningRequest(int warning_request, String email);
 	

@@ -10,6 +10,7 @@ import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
+import java.text.DecimalFormat;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -24,9 +25,12 @@ import com.google.gson.*;
 import es.upm.dit.isst.localizacion.modelo.Country;
 import es.upm.dit.isst.localizacion.dao.LocalizacionDAO;
 import es.upm.dit.isst.localizacion.dao.LocalizacionDAOImpl;
-import es.upm.dit.isst.billgestor.model.Empresa;
 import es.upm.dit.isst.billgestor.dao.EmpresaDAO;
 import es.upm.dit.isst.billgestor.dao.EmpresaDAOImpl;
+import es.upm.dit.isst.billgestor.model.Empresa;
+import es.upm.dit.isst.factura.dao.FacturaDAO;
+import es.upm.dit.isst.factura.dao.FacturaDAOImpl;
+import es.upm.dit.isst.factura.model.Factura;
 
 public class Prueba2 extends HttpServlet{
 	
@@ -37,22 +41,24 @@ public class Prueba2 extends HttpServlet{
 	}
 	
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	//Cojemos el host
+    	//Cojemos el host, el total y el div exito
 	  	String host = request.getParameter("host");
+	  	String totalString = request.getParameter("total");
+	  	String exito = request.getParameter("exito");
+	  	String si = "si";
+	  	double total = Double.parseDouble(totalString);
     	
+	  	//Acudimos a la base de datos de EMPRESA
 	  	EmpresaDAO daoE = EmpresaDAOImpl.getInstance();
 	  	
+	  	//Si el host esta registrado
 	  	if (daoE.isDomainRegistered(host) == true){
 	  		
-	  		//descontamos una
-	  		daoE.decreaseOneRequestDomain(host);
-	  		
-	    	//Pillamos la IP
+	    	//Cogemos la IP
 	    	String ipAddress = request.getHeader("X-FORWARDED-FOR");  
 		  	   if (ipAddress == null){  
 		  		   ipAddress = request.getRemoteAddr();
 		  	   }
-		  	
 		  
 		  	//Creamos la URL para coger el JSON
 		  	String url = "http://freegeoip.net/json/"+ipAddress;
@@ -88,17 +94,25 @@ public class Prueba2 extends HttpServlet{
 	        	}
 	        }
 	        
-	        //Crea un JsonElement y le añadimos el pais localizado
+	        //Calculamos el total + iva
+	        DecimalFormat resultado = new DecimalFormat("#.##");
+	        double iva = Double.parseDouble(countryInfo.getIva());
+	        double totalIva = total * ((iva/100)+1);
+	        String totalIvaString = resultado.format(totalIva);
+	        
+	        //Creamos JsonElement y les añadimos el pais y el total+iva
 	        JsonElement countryObj = gson.toJsonTree(countryInfo);
+	        JsonElement totalIvaObj = gson.toJsonTree(totalIvaString);
 	       
 	        //Comprobamos si el nombre del pais localizado es nulo
 	        if(countryInfo.getName() == null){
-	            myObj.addProperty("success", false); //Escribirá No hemos podido localizarte
+	            myObj.addProperty("success", false); //Escribirá ERROR
 	        }
 	        else {
 	            myObj.addProperty("success", true);  //Se ejecutará lo que hay en if(data.succes)
 	            myObj.add("countryInfo", countryObj);
-	        }
+	            myObj.add("totalIva", totalIvaObj);
+	        }    
 	        
 	        //Escribimos la respuesta
 	        if(callback != null) {
@@ -108,6 +122,43 @@ public class Prueba2 extends HttpServlet{
 	            out.println(myObj.toString());
 	        }
 	        out.close();
+	        
+	    	//Comprobamos si estamos en el caso de que la operacion se ha finalizado
+			if (exito.equals(si)){
+				//decrementamos una
+				daoE.decreaseOneRequestDomain(host);
+				
+				//accedemos a la base de datos de las facturas
+				FacturaDAO daoF = FacturaDAOImpl.getInstance();
+	
+				//obtenemos la empresa y su nombre
+				Empresa empresa = daoE.getEnterpriseDomain(host);
+				String nombreEmpresa = empresa.getName();
+				
+				//cojemosel pais al que hay que facturar
+				String pais = countryInfo.getName();
+				
+				// si ya hay una factura de ese pais
+				if (daoF.tieneFacturaPais(nombreEmpresa, pais) == true){
+					//cogemos la factura
+					Factura factura = daoF.getFacturaPais(nombreEmpresa, pais);
+					//y sus datos de total y total+iva
+					String totalPaisString = factura.getTotal();
+					String totalIvaPaisString = factura.getTotalIva();
+					Double totalPais = Double.parseDouble(totalPaisString);
+					Double totalIvaPais = Double.parseDouble(totalIvaPaisString);
+					//les sumamos los nuevos y los guardamos
+					totalPais = totalPais + total;
+					totalIvaPais = totalIvaPais + totalIva;
+					totalPaisString = resultado.format(totalPais);
+					totalIvaPaisString = resultado.format(totalIvaPais);
+					daoF.setTotalFacturaPais(nombreEmpresa, pais, totalPaisString);
+					daoF.setTotalIvaFacturaPais(nombreEmpresa, pais, totalIvaPaisString);
+				}else{
+					//en caso de que todavía no hubiera una, la creamos
+					daoF.add(nombreEmpresa, pais, totalString, totalIvaString);
+				}
+			}
 	  	}
 	  	else{
 	  		PrintWriter out = response.getWriter();  
@@ -123,7 +174,6 @@ public class Prueba2 extends HttpServlet{
 	        out.close();
 	  	}
     }
-	
 	
 	private static String readAll(Reader rd) throws IOException {
 	    StringBuilder sb = new StringBuilder();

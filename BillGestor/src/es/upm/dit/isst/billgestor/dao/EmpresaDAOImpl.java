@@ -50,6 +50,7 @@ public class EmpresaDAOImpl implements EmpresaDAO {
 		}
 	}
 
+	//implementado por CLIENTE
 	@Override
 	public boolean isDomainRegistered(String domain) {
 		EntityManager em = EMFService.get().createEntityManager();
@@ -164,6 +165,7 @@ public class EmpresaDAOImpl implements EmpresaDAO {
 		
 	}
 
+	//implementado por cliente
 	@Override
 	public void decreaseOneRequestDomain(String domain) {
 		EntityManager em = EMFService.get().createEntityManager();
@@ -204,6 +206,16 @@ public class EmpresaDAOImpl implements EmpresaDAO {
 		}
 		em.getTransaction().commit();
 		
+	}
+
+	//implementado por cliente
+	@Override
+	public Empresa getEnterpriseDomain(String domain) {
+		EntityManager em = EMFService.get().createEntityManager();
+		Query q = em.createQuery("select e from Empresa e where e.domain = :dom");
+		q.setParameter("dom", domain);
+		Empresa e = (Empresa) q.getResultList().get(0);
+		return e;
 	}
 
 
