@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cronentries>
+ <cron>
+ <url>/sendAgencia</url>
+ <description>Sends the cuatrimestral report to Agencia Tributaria</description>
+ <schedule>1st monday of jan,apr,jul,oct 00:00</schedule>
+ </cron>
+</cronentries>
