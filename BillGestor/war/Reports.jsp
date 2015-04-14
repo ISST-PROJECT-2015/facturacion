@@ -52,6 +52,9 @@
 					<p>*CSV file with sales information will be download automatically </p>
 					<p>*This action will cost 4,95€ </p>
 					
+					<form action="/send" method="post" accept-charset="utf-8">
+						<input class="btn btn-default" type="submit" name="report" id="report" value="SEND REPORT TO EMAIL">
+					</form></br>
 				</div>	
 				</section>
 			</div>
