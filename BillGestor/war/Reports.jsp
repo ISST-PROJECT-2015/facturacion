@@ -49,12 +49,13 @@
 								<input class="btn btn-default" type="submit" name="report" id="report" value="DOWNLOAD REPORT">
 					</form></br>
 
-					<p>*CSV file with sales information will be download automatically </p>
-					<p>*This action will cost 4,95€ </p>
-					
+					<p>*CSV file with sales information will be download automatically </p></br>
+					<h4> But, if you prefer receive the report to email, please click here: </h4>
 					<form action="/send" method="post" accept-charset="utf-8">
 						<input class="btn btn-default" type="submit" name="report" id="report" value="SEND REPORT TO EMAIL">
 					</form></br>
+					<p>*In both cases, this action will cost 4,95€ </p>
+						
 				</div>	
 				</section>
 			</div>

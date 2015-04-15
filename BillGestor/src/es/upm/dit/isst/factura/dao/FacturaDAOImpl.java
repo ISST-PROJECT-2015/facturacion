@@ -1,5 +1,7 @@
 package es.upm.dit.isst.factura.dao;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
@@ -28,6 +30,14 @@ public class FacturaDAOImpl implements FacturaDAO {
 			em.persist(factura);
 			em.close();
 		}
+	}
+	
+	@Override
+	public List<String> getEnterpriseList(){
+		EntityManager em = EMFService.get().createEntityManager();
+		Query q = em.createQuery("select f.name from Factura f");
+		List<String> names = q.getResultList();
+		return names;
 	}
 	
 	@Override

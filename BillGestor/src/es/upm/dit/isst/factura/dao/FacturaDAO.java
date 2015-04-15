@@ -1,10 +1,14 @@
 package es.upm.dit.isst.factura.dao;
 
+import java.util.List;
+
 import es.upm.dit.isst.factura.model.Factura;
 
 public interface FacturaDAO {
 
 	public void add(String name, String pais, String total, String totalIva);  //cliente
+	
+	public List<String> getEnterpriseList();
 	
 	public Factura getFactura(String name);
 	

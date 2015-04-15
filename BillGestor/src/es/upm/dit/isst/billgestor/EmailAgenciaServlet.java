@@ -61,18 +61,22 @@ public class EmailAgenciaServlet extends HttpServlet{
 		        
 		        //CSV File Design
 		        StringBuffer buffer = new StringBuffer();
-		        buffer.append("Country, Total sales, Total sales with taxes included\n");
+		        buffer.append("Enterprise, Country, Total sales, Total sales with taxes included\n");
 		        
 		        //Change how to generate CSV for all enterprises
-		       /* for(String countryOfList : localizacionDAO.getCountriesNames()){
-					if(facturaDAO.tieneFacturaPais("Antonio",countryOfList)){
-						Factura f = facturaDAO.getFactura("Antonio");
+		        for(String enterpriseOfList : facturaDAO.getEnterpriseList()){
+		        	for(String countryOfList : localizacionDAO.getCountriesNames()){
+						if(facturaDAO.tieneFacturaPais(enterpriseOfList,countryOfList)){
+						Factura f = facturaDAO.getFactura(enterpriseOfList);
+						String enterprise = f.getName();
 						String country = f.getPais();
 						String total = f.getTotal();
 						String totalIva = f.getTotalIva();
-						buffer.append(country+", "+total+", "+totalIva+"\n");	
+						buffer.append(enterprise+", "+country+", "+total+", "+totalIva+"\n");
+						}
+		        	}
 				}
-		        }*/
+		        
 
 		        byte[] bytes = buffer.toString().getBytes();
 
