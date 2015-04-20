@@ -33,6 +33,10 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<servlet-class>es.upm.dit.isst.billgestor.ReportsServlet</servlet-class>
 	</servlet>
 	<servlet>
+		<servlet-name>Faq</servlet-name>
+		<servlet-class>es.upm.dit.isst.billgestor.FaqServlet</servlet-class>
+	</servlet>
+	<servlet>
 		<servlet-name>Configuration</servlet-name>
 		<servlet-class>es.upm.dit.isst.billgestor.ConfigurationServlet</servlet-class>
 	</servlet>
@@ -67,6 +71,10 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<servlet-mapping>
 		<servlet-name>Reports</servlet-name>
 		<url-pattern>/reports</url-pattern>
+	</servlet-mapping>
+		<servlet-mapping>
+		<servlet-name>Faq</servlet-name>
+		<url-pattern>/faq</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>ChoosePlan</servlet-name>
