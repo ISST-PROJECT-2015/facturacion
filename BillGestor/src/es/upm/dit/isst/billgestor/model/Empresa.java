@@ -23,6 +23,7 @@ public class Empresa implements Serializable {
 	private String domain;
 	private String password;
 	private String product;
+	private String language;
 	private int warning_request;
 	private int remaining_request; 
 	
@@ -32,15 +33,17 @@ public class Empresa implements Serializable {
 
 	private Plan plan;
 	
-	public Empresa(String name, String email, String domain, String password, String product) {
+	public Empresa(String name, String email, String domain, String password, String product, String language) {
 		this.name = name;
 		this.email = email;
 		this.domain = domain;
 		this.password = password;
 		this.product = product;
+		this.language = language;
 		remaining_request = 50; // Número de peticiones iniciales en el plan free.
 		warning_request = 10;
 		plan = Plan.FREE; // Empezamos siempre con el plan free.
+		
 	}
 
 	public Long getId() {
@@ -58,9 +61,17 @@ public class Empresa implements Serializable {
 	public String getEmail() {
 		return email;
 	}
-
+	
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	
+	public void setLanguage(String language) {
+		this.language = language;
+	}
+
+	public String getLanguage() {
+		return language;
 	}
 
 	public String getDomain() {

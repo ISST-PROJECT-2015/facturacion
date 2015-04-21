@@ -7,7 +7,6 @@
 
 <!DOCTYPE html>
 
-
 <html>
 	<head>
 		<meta charset="utf-8">
@@ -53,6 +52,8 @@
 			                <option value="Streaming services">Streaming services</option>
 			                <option value="Other">Other</option>
 			            </select>
+			            
+			            <input type="hidden" id="language" name="language" value=""/>
 
 			        </fieldset>
 			        <input type="submit" class="btn btn-default" value="SUBMIT" />
@@ -69,3 +70,8 @@
 
 	</body>
 </html>
+
+ <script type="text/javascript">
+ var userLang = navigator.language || navigator.userLanguage; 
+ document.getElementById("language").value = String(userLang);
+ </script>

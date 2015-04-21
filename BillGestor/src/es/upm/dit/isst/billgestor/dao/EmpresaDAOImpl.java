@@ -28,11 +28,11 @@ public class EmpresaDAOImpl implements EmpresaDAO {
 
 	@Override
 	public void add(String name, String email, String domain, String password,
-			String product) {
+			String product, String language) {
 		synchronized (this) {
 			EntityManager em = EMFService.get().createEntityManager();
 			Empresa empresa = new Empresa(name, email, domain, password,
-					product);
+					product, language);
 			em.persist(empresa);
 			em.close();
 		}
@@ -119,6 +119,17 @@ public class EmpresaDAOImpl implements EmpresaDAO {
 		Empresa e = (Empresa) q.getResultList().get(0);	
 		em.getTransaction().begin();
 		e.setWarningRequest(warning_request);
+		em.getTransaction().commit();
+	}
+	
+	@Override
+	public void setLanguage(String email, String language){
+		EntityManager em = EMFService.get().createEntityManager();
+		Query q = em.createQuery("select e from Empresa e where e.email = :em");
+		q.setParameter("em", email);
+		Empresa e = (Empresa) q.getResultList().get(0);	
+		em.getTransaction().begin();
+		e.setLanguage(language);
 		em.getTransaction().commit();
 	}
 	

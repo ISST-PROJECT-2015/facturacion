@@ -6,7 +6,7 @@ public interface EmpresaDAO {
 
 	// public List<Empresa> listTodos();
 	
-	public void add (String name, String email, String domain, String password, String product);
+	public void add (String name, String email, String domain, String password, String product, String language);
 	
 	public void remove (long id);
 	
@@ -17,6 +17,8 @@ public interface EmpresaDAO {
 	public boolean isDomainRegistered(String domain); //CLIENTE
 	
 	public boolean areEnoughRequestLeft(String domain); 
+	
+	public void setLanguage(String email, String language);
 	
 	public void increaseRequests(int newRequests, String domain);
 	

@@ -45,6 +45,7 @@ public class DashboardServlet extends HttpServlet {
 		String name = e.getName();
 		String domain =e.getDomain();
 		String product =e.getProduct();
+		String language =e.getLanguage();
 		String warning = String.valueOf(e.getWarningRequest());
 		String plan = e.getPlan().name();
 		int nreq= e.getRemainingRequest();
@@ -53,6 +54,7 @@ public class DashboardServlet extends HttpServlet {
 		req.getSession().setAttribute("domain", domain);
 		req.getSession().setAttribute("product", product);
 		req.getSession().setAttribute("plan", plan);
+		req.getSession().setAttribute("language", language);
 		req.getSession().setAttribute("nreq", nreq);
 		req.getSession().setAttribute("warning", warning);
 		req.getSession().setAttribute("nreqplan", getRequestPlan(plan));

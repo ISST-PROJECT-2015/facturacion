@@ -43,15 +43,16 @@ public class SignUpServlet extends HttpServlet {
 		String email = checkNull(req.getParameter("email"));
 		String password = checkNull(req.getParameter("password"));
 		String product = checkNull(req.getParameter("product"));
+		String language = checkNull(req.getParameter("language"));
 		EmpresaDAO dao = EmpresaDAOImpl.getInstance();
-		dao.add(name, email, domain, password, product);
+		dao.add(name, email, domain, password, product, language);
 		resp.sendRedirect("/");
 		
 	}
 
 	private String checkNull(String s) {
 		if (s == null) {
-			return "";
+			return "nada";
 		}
 		return s;
 	}
