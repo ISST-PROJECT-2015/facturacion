@@ -54,6 +54,7 @@ public class ConfigurationServlet extends HttpServlet {
 		req.getSession().setAttribute("nreqwarrrrr", war);
 		
 		
+		
 		RequestDispatcher view = req.getRequestDispatcher("Configuration.jsp");
 		try {
 			view.forward(req, resp);
@@ -92,10 +93,23 @@ public class ConfigurationServlet extends HttpServlet {
 				return;
 			}
 			
+			
 			if(req.getParameter("delete")!=null){
 				dao.remove(e.getId());
 				session.invalidate();
 				resp.sendRedirect("/");
+				return;
+			}
+			
+			if(req.getParameter("langen")!=null){
+				dao.setLanguage(email, "en");
+				resp.sendRedirect("/dashboard");
+				return;
+			}
+			
+			if(req.getParameter("langes")!=null){
+				dao.setLanguage(email, "es");
+				resp.sendRedirect("/dashboard");
 				return;
 			}
 			

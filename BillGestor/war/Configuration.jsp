@@ -65,6 +65,14 @@
 			         
 								<input class="btn btn-default" type="submit" name="subm" id="subm" value="CONFIRMAR">
 					</form></br>
+					
+					<form action="/send" method="post" accept-charset="utf-8">
+						<input class="btn btn-default" type="submit" value="Enviar email a la dirección de la empresa">
+					</form></br>
+					<h4> Si quiere cambiar el idioma a inglés, pulse el siguiente botón</h4>
+					<form action="" method="Post">
+   							 <input class="btn btn-default" type="submit" name="langen" id="langen" value="CAMBIAR IDIOMA" >
+					</form></br>
 
 		        	<h4> Si quiere borrar su cuenta, pulse el siguiente botón: </h4>
 		        	<form action="" method="post" accept-charset="utf-8">
@@ -139,14 +147,22 @@
 			         
 								<input class="btn btn-default" type="submit" name="subm" id="subm" value="SUBMIT">
 					</form></br>
-
+					
+					<form action="/send" method="post" accept-charset="utf-8">
+						<input class="btn btn-default" type="submit" value="Send email to Enterprise address">
+					</form></br>
+					
+					<h4> If you wish to change the language to spanish, click the following button</h4>
+					<form action="" method="Post">
+   							 <input class="btn btn-default" type="submit" name="langes" id="langes" value="CHANGE LANGUAGE" >
+					</form></br>
+				
+					
 		        	<h4> If you wish to close your account, click the next button: </h4>
 		        	<form action="" method="post" accept-charset="utf-8">
 								<input class="btn btn-default" type="submit" name="delete" id="delete" value="REMOVE ACCOUNT">
 					</form></br>
-					<form action="/send" method="post" accept-charset="utf-8">
-						<input class="btn btn-default" type="submit" value="Send email to Enterprise address">
-					</form>
+					
 					<p>*You will lose all your data, plans and remaining requests</p>
 					
 				</div>	
