@@ -16,6 +16,8 @@ public interface EmpresaDAO {
 	
 	public boolean isDomainRegistered(String domain); //CLIENTE
 	
+	public boolean isEmailRegistered(String email);
+	
 	public boolean areEnoughRequestLeft(String domain); 
 	
 	public void setLanguage(String email, String language);

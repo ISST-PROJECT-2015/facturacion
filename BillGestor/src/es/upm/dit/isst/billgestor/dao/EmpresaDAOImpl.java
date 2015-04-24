@@ -229,5 +229,14 @@ public class EmpresaDAOImpl implements EmpresaDAO {
 		return e;
 	}
 
+	@Override
+	public boolean isEmailRegistered(String email) {
+		EntityManager em = EMFService.get().createEntityManager();
+		Query q = em.createQuery("select e from Empresa e where e.email = :ema");
+		q.setParameter("ema", email);
+		if(!q.getResultList().isEmpty()) return true;
+		return false;
+	}
+
 
 }
