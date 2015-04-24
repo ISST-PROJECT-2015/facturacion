@@ -62,7 +62,6 @@ public class EmpresaDAOImpl implements EmpresaDAO {
 
 	@Override
 	public boolean areEnoughRequestLeft(String domain) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 	
@@ -203,7 +202,7 @@ public class EmpresaDAOImpl implements EmpresaDAO {
 			System.out.println("Correo enviado a:"+ RECIPIENT1);
 			
 		}
-		if(e.getPlan().equals(Plan.NO_PLAN)){
+		if(e.getRemainingRequest() == 0 && !e.getPlan().equals(Plan.NO_PLAN)){
 			RECIPIENT1 = e.getEmail();
 			String from = USER_NAME;
 	        String pass = PASSWORD;
