@@ -91,23 +91,14 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 	
 	
 	<servlet>
-		<servlet-name>Prueba2</servlet-name>
-		<servlet-class>es.upm.dit.isst.localizacion.Prueba2</servlet-class>
+		<servlet-name>Localizacion</servlet-name>
+		<servlet-class>es.upm.dit.isst.localizacion.Localizacion</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>Prueba2</servlet-name>
-		<url-pattern>/prueba2</url-pattern>
+		<servlet-name>Localizacion</servlet-name>
+		<url-pattern>/localizacion</url-pattern>
 	</servlet-mapping>
-	
-	<servlet>
-		<servlet-name>Prueba3</servlet-name>
-		<servlet-class>es.upm.dit.isst.localizacion.Prueba3</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>Prueba3</servlet-name>
-		<url-pattern>/prueba3</url-pattern>
-	</servlet-mapping>
-	
+		
 	<servlet>
 		<servlet-name>Main</servlet-name>
 		<servlet-class>es.upm.dit.isst.localizacion.MainServlet</servlet-class>
